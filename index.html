@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Useless Machine 3000</title>
+  <meta name="description" content="An exercise in futility, perfected. The most over-engineered useless machine ever conceived.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Particle Background Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <div class="loading-content">
+      <div class="loading-icon">
+        <div class="loading-ring"></div>
+        <div class="loading-ring ring-2"></div>
+        <div class="loading-ring ring-3"></div>
+        <div class="loading-dot"></div>
+      </div>
+      <h1 class="loading-title">THE USELESS MACHINE</h1>
+      <p class="loading-version">v3000.0.0</p>
+      <div class="loading-bar-container">
+        <div class="loading-bar" id="loadingBar"></div>
+      </div>
+      <p class="loading-message" id="loadingMessage">Initializing...</p>
+    </div>
+  </div>
+
+  <!-- Main Application -->
+  <div id="app" class="app hidden">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-glow"></div>
+      <h1 class="title">
+        <span class="title-the">THE</span>
+        <span class="title-main">USELESS MACHINE</span>
+        <span class="title-version">3000</span>
+      </h1>
+      <p class="tagline">An exercise in futility, perfected.</p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Device Card -->
+      <div class="device-card" id="deviceCard">
+        <div class="device-border-glow"></div>
+        <div class="device-inner">
+          <!-- Hatch decorative element -->
+          <div class="hatch-plate">
+            <div class="hatch-screw left"></div>
+            <div class="hatch-line"></div>
+            <div class="hatch-screw right"></div>
+          </div>
+
+          <!-- Arm Assembly -->
+          <div class="arm-container" id="armContainer">
+            <div class="arm-shaft"></div>
+            <div class="arm-joint"></div>
+            <div class="arm-finger"></div>
+            <div class="arm-glow"></div>
+          </div>
+
+          <!-- Toggle Area -->
+          <div class="toggle-section">
+            <span class="toggle-label label-off">OFF</span>
+            <div class="toggle-track" id="toggleTrack" role="switch" aria-checked="false" tabindex="0" aria-label="Useless toggle switch">
+              <div class="toggle-glow-track"></div>
+              <div class="toggle-knob" id="toggleKnob">
+                <div class="knob-shine"></div>
+              </div>
+            </div>
+            <span class="toggle-label label-on">ON</span>
+          </div>
+
+          <!-- Status Display -->
+          <div class="status-display">
+            <div class="status-dot" id="statusDot"></div>
+            <span class="status-text" id="statusText">SYSTEM IDLE</span>
+          </div>
+
+          <!-- Burst particles container -->
+          <div class="burst-container" id="burstContainer"></div>
+        </div>
+      </div>
+
+      <!-- Stats Panel -->
+      <div class="stats-panel" id="statsPanel">
+        <div class="stats-header">
+          <div class="stats-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <rect x="1" y="8" width="3" height="7" rx="0.5" fill="currentColor" opacity="0.5"/>
+              <rect x="5.5" y="5" width="3" height="10" rx="0.5" fill="currentColor" opacity="0.7"/>
+              <rect x="10" y="1" width="3" height="14" rx="0.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3 class="stats-title">ANALYTICS</h3>
+        </div>
+
+        <div class="stat-item">
+          <span class="stat-label">Time Wasted</span>
+          <span class="stat-value mono" id="timeWasted">00:00:00</span>
+        </div>
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+          <span class="stat-label">Total Toggles</span>
+          <span class="stat-value mono" id="totalToggles">0</span>
+        </div>
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+          <span class="stat-label">Toggle Rate</span>
+          <span class="stat-value mono" id="toggleRate">0.00<span class="stat-unit">/min</span></span>
+        </div>
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+          <span class="stat-label">Productivity Impact</span>
+          <span class="stat-value accent" id="productivity">0%</span>
+        </div>
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+          <span class="stat-label">Purpose Found</span>
+          <span class="stat-value muted" id="purposeFound">None</span>
+        </div>
+        <div class="stat-divider"></div>
+
+        <div class="stat-item">
+          <span class="stat-label">Enlightenment Level</span>
+          <div class="enlightenment-bar">
+            <div class="enlightenment-fill" id="enlightenmentFill"></div>
+          </div>
+        </div>
+
+        <div class="stats-footer">
+          <button class="share-btn" id="shareBtn" aria-label="Share your futility score">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/>
+              <polyline points="16 6 12 2 8 6"/>
+              <line x1="12" y1="2" x2="12" y2="15"/>
+            </svg>
+            Share Futility Score
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <!-- Achievement Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Engineered with excessive dedication to accomplish absolutely nothing.</p>
+      <p class="footer-sub">© 2026 Useless Machine Corp. No rights reserved. None needed.</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
