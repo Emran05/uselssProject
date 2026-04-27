@@ -729,6 +729,190 @@
   }
 
   /* --------------------------------------------------------
+     NEW USELESS FEATURES
+     -------------------------------------------------------- */
+  function setupUselessFeatures() {
+    // Cookie Banner
+    const cookieBtns = document.querySelectorAll('.cookie-btn');
+    const cookieBanner = document.getElementById('cookieBanner');
+    cookieBtns.forEach(btn => btn.addEventListener('click', () => {
+      cookieBanner.style.display = 'none';
+      // It comes back
+      setTimeout(() => {
+        cookieBanner.style.display = 'flex';
+      }, Math.random() * 20000 + 10000);
+    }));
+
+    // Fake Mode Toggle
+    const fakeMode = document.getElementById('fakeMode');
+    fakeMode.addEventListener('click', () => {
+      document.body.style.opacity = '0';
+      setTimeout(() => { document.body.style.opacity = '1'; }, 150);
+    });
+
+    // Theme Switcher
+    const themeSelect = document.getElementById('themeSelect');
+    themeSelect.addEventListener('change', () => {
+      // Just shake the screen
+      document.body.classList.add('shake');
+      setTimeout(() => document.body.classList.remove('shake'), 400);
+    });
+
+    // Volume Slider
+    const volumeSlider = document.getElementById('volumeSlider');
+    const volumeValue = document.getElementById('volumeValue');
+    volumeSlider.addEventListener('input', (e) => {
+      volumeValue.textContent = e.target.value + '%';
+    });
+    volumeSlider.addEventListener('change', (e) => {
+      // Revert to 73
+      setTimeout(() => {
+        volumeSlider.value = 73;
+        volumeValue.textContent = '73%';
+      }, 500);
+    });
+
+    // System Monitor
+    const cpuFill = document.getElementById('cpuFill');
+    const cpuPercent = document.getElementById('cpuPercent');
+    const ramFill = document.getElementById('ramFill');
+    const ramPercent = document.getElementById('ramPercent');
+    const diskFill = document.getElementById('diskFill');
+    const diskPercent = document.getElementById('diskPercent');
+    const soulFill = document.getElementById('soulFill');
+    const soulPercent = document.getElementById('soulPercent');
+    setInterval(() => {
+      const c = Math.floor(Math.random() * 100);
+      const r = Math.floor(Math.random() * 100);
+      const d = Math.floor(Math.random() * 100);
+      const s = 0; // Soul is always 0
+      cpuFill.style.width = c + '%'; cpuPercent.textContent = c + '%';
+      ramFill.style.width = r + '%'; ramPercent.textContent = r + '%';
+      diskFill.style.width = d + '%'; diskPercent.textContent = d + '%';
+      soulFill.style.width = s + '%'; soulPercent.textContent = s + '%';
+    }, 1500);
+
+    // Progress Bar
+    const statuses = ["Downloading more RAM...", "Reticulating splines...", "Deleting System32...", "Optimizing the void...", "Loading nothing..."];
+    const nowhereStatus = document.getElementById('nowhereStatus');
+    setInterval(() => {
+      nowhereStatus.textContent = statuses[Math.floor(Math.random() * statuses.length)];
+    }, 4000);
+
+    // Newsletter
+    const newsletterBtn = document.getElementById('newsletterBtn');
+    const subscriberCount = document.getElementById('subscriberCount');
+    let subs = 2847291;
+    newsletterBtn.addEventListener('click', () => {
+      subs++;
+      subscriberCount.textContent = subs.toLocaleString();
+      document.getElementById('newsletterInput').value = '';
+    });
+
+    // TOS
+    const tosPanel = document.querySelector('.tos-panel');
+    document.getElementById('tosAgree').addEventListener('click', () => tosPanel.style.opacity = '0.5');
+    document.getElementById('tosDisagree').addEventListener('click', () => tosPanel.style.opacity = '0.5');
+
+    // Password Strength
+    const passwordInput = document.getElementById('passwordInput');
+    const passwordMeterFill = document.getElementById('passwordMeterFill');
+    const passwordVerdict = document.getElementById('passwordVerdict');
+    const verdicts = ["Weak", "Still weak", "Pathetic", "Try harder", "Terrible", "Just awful"];
+    passwordInput.addEventListener('input', () => {
+      passwordMeterFill.style.width = Math.random() * 30 + '%';
+      passwordVerdict.textContent = verdicts[Math.floor(Math.random() * verdicts.length)];
+    });
+
+    // Poll
+    const pollOptions = document.querySelectorAll('.poll-option');
+    pollOptions.forEach(opt => opt.addEventListener('click', () => {
+      opt.style.background = 'var(--accent-violet)';
+      setTimeout(() => { opt.style.background = 'var(--surface)'; }, 300);
+    }));
+
+    // Download
+    const downloadBtn = document.getElementById('downloadBtn');
+    const downloadBar = document.getElementById('downloadBar');
+    const downloadStatus = document.getElementById('downloadStatus');
+    downloadBtn.addEventListener('click', () => {
+      downloadBtn.disabled = true;
+      downloadStatus.textContent = 'Downloading...';
+      let progress = 0;
+      const int = setInterval(() => {
+        progress += Math.random() * 10;
+        if (progress > 99) {
+          progress = 99.9;
+          clearInterval(int);
+          downloadStatus.textContent = 'Stuck at 99.9% (Forever)';
+        }
+        downloadBar.style.width = progress + '%';
+      }, 200);
+    });
+
+    // Chatbot
+    const chatbotToggle = document.getElementById('chatbotToggle');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+
+    chatbotToggle.addEventListener('click', () => chatbotWindow.classList.add('active'));
+    chatbotClose.addEventListener('click', () => chatbotWindow.classList.remove('active'));
+
+    const botReplies = [
+      "I literally cannot help you.",
+      "Have you tried turning it off and on again?",
+      "That sounds like a you problem.",
+      "Error 404: Care not found.",
+      "I am just a bunch of if-statements."
+    ];
+
+    chatbotSend.addEventListener('click', sendMsg);
+    chatbotInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') sendMsg(); });
+
+    function sendMsg() {
+      const val = chatbotInput.value.trim();
+      if(!val) return;
+      
+      const uMsg = document.createElement('div');
+      uMsg.className = 'chat-msg user';
+      uMsg.innerHTML = `<p>${val}</p>`;
+      chatbotMessages.appendChild(uMsg);
+      chatbotInput.value = '';
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+
+      setTimeout(() => {
+        const bMsg = document.createElement('div');
+        bMsg.className = 'chat-msg bot';
+        bMsg.innerHTML = `<p>${botReplies[Math.floor(Math.random() * botReplies.length)]}</p>`;
+        chatbotMessages.appendChild(bMsg);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      }, 500 + Math.random() * 1000);
+    }
+
+    // Notifications
+    const notifBell = document.getElementById('notifBell');
+    const notifPanel = document.getElementById('notifPanel');
+    const notifClear = document.getElementById('notifClear');
+    const notifBadge = document.getElementById('notifBadge');
+    
+    notifBell.addEventListener('click', () => {
+      notifPanel.classList.toggle('active');
+    });
+    notifClear.addEventListener('click', () => {
+      document.getElementById('notifList').innerHTML = '';
+      notifBadge.textContent = '0';
+    });
+
+    // Visitor counter
+    setInterval(() => {
+      document.getElementById('visitorCount').textContent = Math.floor(Math.random() * 1000000).toLocaleString();
+    }, 5000);
+  }
+
+  /* --------------------------------------------------------
      INITIALIZATION
      -------------------------------------------------------- */
   let particleSystem;
@@ -750,6 +934,9 @@
       document.querySelector('.label-off').classList.remove('highlight');
     }, 2000);
 
+    // Setup new useless UI features
+    setupUselessFeatures();
+
     // Run loading sequence
     await runLoadingSequence();
 
@@ -761,9 +948,6 @@
 
     // Start stats timer
     startStatsTimer();
-
-    // Re-check achievements on load (in case state was loaded)
-    // but don't show toasts for already-unlocked ones
 
     // Set initial arm position
     dom.armContainer.style.transform = 'translateX(-50%) translateY(-10px)';
