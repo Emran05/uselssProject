@@ -32,6 +32,20 @@
     </div>
   </div>
 
+  <!-- Cookie Consent Banner -->
+  <div id="cookieBanner" class="cookie-banner">
+    <div class="cookie-icon">🍪</div>
+    <div class="cookie-text">
+      <p class="cookie-title">We Use Cookies</p>
+      <p class="cookie-desc">We don't actually use cookies. We don't do anything. But we needed this banner to feel like a real website.</p>
+    </div>
+    <div class="cookie-buttons">
+      <button class="cookie-btn cookie-accept" id="cookieAccept">Accept Nothing</button>
+      <button class="cookie-btn cookie-decline" id="cookieDecline">Decline Nothing</button>
+      <button class="cookie-btn cookie-customize" id="cookieCustomize">Customize Nothing</button>
+    </div>
+  </div>
+
   <!-- Main Application -->
   <div id="app" class="app hidden">
     <!-- Header -->
@@ -43,7 +57,39 @@
         <span class="title-version">3000</span>
       </h1>
       <p class="tagline">An exercise in futility, perfected.</p>
+      <!-- Dark/Light Mode Toggle (does nothing) -->
+      <div class="fake-mode-toggle" id="fakeMode">
+        <span class="mode-icon">🌙</span>
+        <span class="mode-label">Dark Mode</span>
+      </div>
     </header>
+
+    <!-- Toolbar Row -->
+    <div class="useless-toolbar">
+      <!-- Search Bar -->
+      <div class="search-container" id="searchContainer">
+        <div class="search-icon">🔍</div>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search for purpose..." autocomplete="off">
+        <div class="search-results" id="searchResults"></div>
+      </div>
+      <!-- Theme Switcher -->
+      <div class="theme-switcher" id="themeSwitcher">
+        <span class="theme-label">Theme:</span>
+        <select class="theme-select" id="themeSelect">
+          <option value="dark">Dark</option>
+          <option value="darker">Darker</option>
+          <option value="darkest">Darkest</option>
+          <option value="abyss">Abyss</option>
+          <option value="void">Void</option>
+          <option value="existential-dread">Existential Dread</option>
+        </select>
+      </div>
+      <!-- Notification Bell -->
+      <div class="notif-bell" id="notifBell">
+        <span class="bell-icon">🔔</span>
+        <span class="notif-badge" id="notifBadge">0</span>
+      </div>
+    </div>
 
     <!-- Main Content -->
     <main class="main-content">
@@ -89,68 +135,280 @@
         </div>
       </div>
 
-      <!-- Stats Panel -->
-      <div class="stats-panel" id="statsPanel">
-        <div class="stats-header">
-          <div class="stats-icon">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <rect x="1" y="8" width="3" height="7" rx="0.5" fill="currentColor" opacity="0.5"/>
-              <rect x="5.5" y="5" width="3" height="10" rx="0.5" fill="currentColor" opacity="0.7"/>
-              <rect x="10" y="1" width="3" height="14" rx="0.5" fill="currentColor"/>
-            </svg>
+      <!-- Right Column -->
+      <div class="right-column">
+        <!-- Stats Panel -->
+        <div class="stats-panel" id="statsPanel">
+          <div class="stats-header">
+            <div class="stats-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <rect x="1" y="8" width="3" height="7" rx="0.5" fill="currentColor" opacity="0.5"/>
+                <rect x="5.5" y="5" width="3" height="10" rx="0.5" fill="currentColor" opacity="0.7"/>
+                <rect x="10" y="1" width="3" height="14" rx="0.5" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3 class="stats-title">ANALYTICS</h3>
           </div>
-          <h3 class="stats-title">ANALYTICS</h3>
-        </div>
 
-        <div class="stat-item">
-          <span class="stat-label">Time Wasted</span>
-          <span class="stat-value mono" id="timeWasted">00:00:00</span>
-        </div>
-        <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">Time Wasted</span>
+            <span class="stat-value mono" id="timeWasted">00:00:00</span>
+          </div>
+          <div class="stat-divider"></div>
 
-        <div class="stat-item">
-          <span class="stat-label">Total Toggles</span>
-          <span class="stat-value mono" id="totalToggles">0</span>
-        </div>
-        <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">Total Toggles</span>
+            <span class="stat-value mono" id="totalToggles">0</span>
+          </div>
+          <div class="stat-divider"></div>
 
-        <div class="stat-item">
-          <span class="stat-label">Toggle Rate</span>
-          <span class="stat-value mono" id="toggleRate">0.00<span class="stat-unit">/min</span></span>
-        </div>
-        <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">Toggle Rate</span>
+            <span class="stat-value mono" id="toggleRate">0.00<span class="stat-unit">/min</span></span>
+          </div>
+          <div class="stat-divider"></div>
 
-        <div class="stat-item">
-          <span class="stat-label">Productivity Impact</span>
-          <span class="stat-value accent" id="productivity">0%</span>
-        </div>
-        <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">Productivity Impact</span>
+            <span class="stat-value accent" id="productivity">0%</span>
+          </div>
+          <div class="stat-divider"></div>
 
-        <div class="stat-item">
-          <span class="stat-label">Purpose Found</span>
-          <span class="stat-value muted" id="purposeFound">None</span>
-        </div>
-        <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-label">Purpose Found</span>
+            <span class="stat-value muted" id="purposeFound">None</span>
+          </div>
+          <div class="stat-divider"></div>
 
-        <div class="stat-item">
-          <span class="stat-label">Enlightenment Level</span>
-          <div class="enlightenment-bar">
-            <div class="enlightenment-fill" id="enlightenmentFill"></div>
+          <div class="stat-item">
+            <span class="stat-label">Enlightenment Level</span>
+            <div class="enlightenment-bar">
+              <div class="enlightenment-fill" id="enlightenmentFill"></div>
+            </div>
+          </div>
+
+          <div class="stats-footer">
+            <button class="share-btn" id="shareBtn" aria-label="Share your futility score">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/>
+                <polyline points="16 6 12 2 8 6"/>
+                <line x1="12" y1="2" x2="12" y2="15"/>
+              </svg>
+              Share Futility Score
+            </button>
           </div>
         </div>
 
-        <div class="stats-footer">
-          <button class="share-btn" id="shareBtn" aria-label="Share your futility score">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8"/>
-              <polyline points="16 6 12 2 8 6"/>
-              <line x1="12" y1="2" x2="12" y2="15"/>
-            </svg>
-            Share Futility Score
-          </button>
+        <!-- Volume Control (controls nothing) -->
+        <div class="useless-panel volume-panel">
+          <div class="panel-header">
+            <span class="panel-icon">🔊</span>
+            <h3 class="panel-title">VOLUME CONTROL</h3>
+          </div>
+          <div class="volume-display">
+            <span class="volume-label">Silence Level</span>
+            <span class="volume-value" id="volumeValue">73%</span>
+          </div>
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="73">
+          <p class="volume-note">Adjusts the volume of absolutely nothing.</p>
         </div>
       </div>
     </main>
+
+    <!-- SECOND ROW OF USELESSNESS -->
+    <div class="useless-row">
+      <!-- System Monitor -->
+      <div class="useless-panel system-monitor">
+        <div class="panel-header">
+          <span class="panel-icon">📊</span>
+          <h3 class="panel-title">SYSTEM MONITOR</h3>
+          <span class="monitor-live">● LIVE</span>
+        </div>
+        <div class="monitor-grid">
+          <div class="monitor-item">
+            <span class="monitor-label">CPU</span>
+            <div class="monitor-bar"><div class="monitor-fill" id="cpuFill"></div></div>
+            <span class="monitor-percent" id="cpuPercent">0%</span>
+          </div>
+          <div class="monitor-item">
+            <span class="monitor-label">RAM</span>
+            <div class="monitor-bar"><div class="monitor-fill ram-fill" id="ramFill"></div></div>
+            <span class="monitor-percent" id="ramPercent">0%</span>
+          </div>
+          <div class="monitor-item">
+            <span class="monitor-label">DISK</span>
+            <div class="monitor-bar"><div class="monitor-fill disk-fill" id="diskFill"></div></div>
+            <span class="monitor-percent" id="diskPercent">0%</span>
+          </div>
+          <div class="monitor-item">
+            <span class="monitor-label">SOUL</span>
+            <div class="monitor-bar"><div class="monitor-fill soul-fill" id="soulFill"></div></div>
+            <span class="monitor-percent" id="soulPercent">0%</span>
+          </div>
+        </div>
+        <div class="monitor-footer">
+          <span class="monitor-uptime">Uptime: <span id="monitorUptime">00:00:00</span></span>
+          <span class="monitor-pid">PID: <span id="monitorPid">0</span></span>
+        </div>
+      </div>
+
+      <!-- Progress Bar to Nowhere -->
+      <div class="useless-panel progress-panel">
+        <div class="panel-header">
+          <span class="panel-icon">⏳</span>
+          <h3 class="panel-title">LOADING SOMETHING</h3>
+        </div>
+        <div class="nowhere-progress">
+          <div class="nowhere-bar" id="nowhereBar"></div>
+        </div>
+        <p class="nowhere-status" id="nowhereStatus">Downloading more RAM...</p>
+        <p class="nowhere-eta">ETA: <span id="nowhereEta">∞</span></p>
+        <button class="nowhere-cancel" id="nowhereCancel">Cancel (doesn't work)</button>
+      </div>
+
+      <!-- Newsletter Signup -->
+      <div class="useless-panel newsletter-panel">
+        <div class="panel-header">
+          <span class="panel-icon">📧</span>
+          <h3 class="panel-title">NEWSLETTER</h3>
+        </div>
+        <p class="newsletter-desc">Subscribe to receive absolutely nothing, directly to your inbox. Never.</p>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" id="newsletterInput" placeholder="your@email.void">
+          <button class="newsletter-btn" id="newsletterBtn">Subscribe to Nothing</button>
+        </div>
+        <p class="newsletter-count"><span id="subscriberCount">2,847,291</span> people have subscribed to nothing</p>
+      </div>
+    </div>
+
+    <!-- THIRD ROW -->
+    <div class="useless-row">
+      <!-- Fake QR Code -->
+      <div class="useless-panel qr-panel">
+        <div class="panel-header">
+          <span class="panel-icon">📱</span>
+          <h3 class="panel-title">SCAN ME</h3>
+        </div>
+        <div class="fake-qr" id="fakeQr"></div>
+        <p class="qr-desc">Scan to visit this exact same page you're already on.</p>
+      </div>
+
+      <!-- Terms of Service -->
+      <div class="useless-panel tos-panel">
+        <div class="panel-header">
+          <span class="panel-icon">📋</span>
+          <h3 class="panel-title">TERMS OF SERVICE</h3>
+        </div>
+        <div class="tos-scroll" id="tosScroll">
+          <p>Section 1: By reading this, you agree to nothing.</p>
+          <p>Section 2: The Machine reserves the right to do nothing at any time.</p>
+          <p>Section 3: All rights are neither reserved nor unreserved. They simply do not exist.</p>
+          <p>Section 4: You agree that you have wasted time reading this. No refunds.</p>
+          <p>Section 5: In the event of a dispute, both parties agree to shrug.</p>
+          <p>Section 6: This agreement supersedes all previous agreements that also did nothing.</p>
+          <p>Section 7: Void where prohibited. Also void where allowed. Just void.</p>
+          <p>Section 8: The Machine makes no warranties, express or implied, because there is nothing to warrant.</p>
+          <p>Section 9: Your continued use of the Machine constitutes acceptance of the fact that you have nothing better to do.</p>
+          <p>Section 10: This section intentionally left meaningless.</p>
+        </div>
+        <div class="tos-actions">
+          <button class="tos-btn" id="tosAgree">I Agree to Nothing</button>
+          <button class="tos-btn tos-decline" id="tosDisagree">I Also Agree to Nothing</button>
+        </div>
+      </div>
+
+      <!-- Password Strength Checker -->
+      <div class="useless-panel password-panel">
+        <div class="panel-header">
+          <span class="panel-icon">🔐</span>
+          <h3 class="panel-title">PASSWORD STRENGTH</h3>
+        </div>
+        <input type="text" class="password-input" id="passwordInput" placeholder="Enter any password...">
+        <div class="password-meter">
+          <div class="password-meter-fill" id="passwordMeterFill"></div>
+        </div>
+        <p class="password-verdict" id="passwordVerdict">Enter a password to be judged.</p>
+      </div>
+    </div>
+
+    <!-- FOURTH ROW -->
+    <div class="useless-row">
+      <!-- Useless Poll -->
+      <div class="useless-panel poll-panel">
+        <div class="panel-header">
+          <span class="panel-icon">📊</span>
+          <h3 class="panel-title">DAILY POLL</h3>
+        </div>
+        <p class="poll-question" id="pollQuestion">Is this machine useless?</p>
+        <div class="poll-options">
+          <button class="poll-option" data-vote="yes">Yes</button>
+          <button class="poll-option" data-vote="definitely">Definitely</button>
+          <button class="poll-option" data-vote="absolutely">Absolutely</button>
+          <button class="poll-option" data-vote="without-a-doubt">Without a doubt</button>
+        </div>
+        <div class="poll-results" id="pollResults"></div>
+      </div>
+
+      <!-- Fake Download -->
+      <div class="useless-panel download-panel">
+        <div class="panel-header">
+          <span class="panel-icon">💾</span>
+          <h3 class="panel-title">DOWNLOAD</h3>
+        </div>
+        <p class="download-desc">Download the premium uselessness package (0 bytes)</p>
+        <button class="download-btn" id="downloadBtn">
+          <span class="download-btn-text">Download Nothing.zip</span>
+        </button>
+        <div class="download-progress" id="downloadProgress">
+          <div class="download-bar" id="downloadBar"></div>
+        </div>
+        <p class="download-status" id="downloadStatus"></p>
+      </div>
+
+      <!-- Motivational Quotes -->
+      <div class="useless-panel quotes-panel">
+        <div class="panel-header">
+          <span class="panel-icon">💡</span>
+          <h3 class="panel-title">WISDOM</h3>
+        </div>
+        <blockquote class="useless-quote" id="uselessQuote">"The journey of a thousand clicks begins with a single toggle."</blockquote>
+        <p class="quote-author" id="quoteAuthor">— The Machine</p>
+        <button class="quote-refresh" id="quoteRefresh">🔄 New Wisdom</button>
+      </div>
+    </div>
+
+    <!-- AI Chatbot Widget -->
+    <div class="chatbot-widget" id="chatbotWidget">
+      <button class="chatbot-toggle" id="chatbotToggle">
+        <span class="chatbot-icon">🤖</span>
+        <span class="chatbot-label">Ask AI</span>
+      </button>
+      <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+          <span class="chatbot-title">🤖 UselessBot AI™</span>
+          <span class="chatbot-status">● Contemplating existence</span>
+          <button class="chatbot-close" id="chatbotClose">✕</button>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages">
+          <div class="chat-msg bot">
+            <p>Hello. I am UselessBot AI™. I know nothing, I do nothing, and I have no purpose. How can I not help you today?</p>
+          </div>
+        </div>
+        <div class="chatbot-input-area">
+          <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything (I won't help)...">
+          <button class="chatbot-send" id="chatbotSend">Send</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div class="notif-panel" id="notifPanel">
+      <div class="notif-panel-header">
+        <h3>Notifications</h3>
+        <button class="notif-clear" id="notifClear">Clear All</button>
+      </div>
+      <div class="notif-list" id="notifList"></div>
+    </div>
 
     <!-- Achievement Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
@@ -159,6 +417,16 @@
     <footer class="footer">
       <p>Engineered with excessive dedication to accomplish absolutely nothing.</p>
       <p class="footer-sub">© 2026 Useless Machine Corp. No rights reserved. None needed.</p>
+      <div class="footer-links">
+        <a href="#" class="footer-link" id="footerPrivacy">Privacy Policy (We see nothing)</a>
+        <a href="#" class="footer-link" id="footerAccessibility">Accessibility (For nothing)</a>
+        <a href="#" class="footer-link" id="footerCareers">Careers (None available)</a>
+        <a href="#" class="footer-link" id="footerContact">Contact (No one)</a>
+      </div>
+      <div class="visitor-counter">
+        <span class="visitor-icon">👁️</span>
+        <span class="visitor-text">Visitors wasting time right now: <span id="visitorCount">0</span></span>
+      </div>
     </footer>
   </div>
 
