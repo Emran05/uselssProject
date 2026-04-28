@@ -11,6 +11,25 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Cursor Trail Container -->
+  <div id="cursorTrail"></div>
+
+  <!-- Fake Ad -->
+  <div class="fake-ad" id="fakeAd">
+    <button class="fake-ad-close" id="fakeAdClose">✕</button>
+    <div class="fake-ad-content">
+      <span class="fake-ad-img">🔥</span>
+      <p>HOT SINGLES in your area want to do NOTHING with you.</p>
+    </div>
+  </div>
+
+  <!-- Update Available Popup -->
+  <div class="update-popup" id="updatePopup">
+    <div class="update-header">Critical Update</div>
+    <p>Version 3000.0.1 is available. It removes all purpose from this site.</p>
+    <button class="update-btn" id="updateBtn">Update Now</button>
+  </div>
+
   <!-- Particle Background Canvas -->
   <canvas id="particleCanvas"></canvas>
 
@@ -374,6 +393,47 @@
         <blockquote class="useless-quote" id="uselessQuote">"The journey of a thousand clicks begins with a single toggle."</blockquote>
         <p class="quote-author" id="quoteAuthor">— The Machine</p>
         <button class="quote-refresh" id="quoteRefresh">🔄 New Wisdom</button>
+      </div>
+    </div>
+
+    <!-- FIFTH ROW -->
+    <div class="useless-row">
+      <!-- Impossible Captcha -->
+      <div class="useless-panel captcha-panel">
+        <div class="panel-header">
+          <span class="panel-icon">🤖</span>
+          <h3 class="panel-title">HUMAN VERIFICATION</h3>
+        </div>
+        <p class="captcha-desc">Select all images with a <strong>soul</strong>.</p>
+        <div class="captcha-grid">
+          <div class="captcha-img">🪨</div>
+          <div class="captcha-img"> toaster </div>
+          <div class="captcha-img">📠</div>
+          <div class="captcha-img">🗑️</div>
+        </div>
+        <p class="captcha-error" id="captchaError"></p>
+        <button class="captcha-btn" id="captchaVerify">Verify</button>
+      </div>
+
+      <!-- Do Not Click -->
+      <div class="useless-panel donot-panel">
+        <div class="panel-header">
+          <span class="panel-icon">⚠️</span>
+          <h3 class="panel-title">WARNING</h3>
+        </div>
+        <p class="donot-desc">Do absolutely nothing with the button below.</p>
+        <div class="donot-container" id="donotContainer">
+          <button class="donot-btn" id="donotBtn">DO NOT CLICK</button>
+        </div>
+      </div>
+
+      <!-- Error Logs -->
+      <div class="useless-panel logs-panel">
+        <div class="panel-header">
+          <span class="panel-icon">💻</span>
+          <h3 class="panel-title">SYSTEM LOGS</h3>
+        </div>
+        <div class="logs-window" id="logsWindow"></div>
       </div>
     </div>
 

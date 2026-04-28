@@ -910,6 +910,84 @@
     setInterval(() => {
       document.getElementById('visitorCount').textContent = Math.floor(Math.random() * 1000000).toLocaleString();
     }, 5000);
+
+    // Cursor Trail
+    document.addEventListener('mousemove', (e) => {
+      if (Math.random() > 0.8) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'cursor-sparkle';
+        sparkle.style.left = e.clientX + 'px';
+        sparkle.style.top = e.clientY + 'px';
+        document.getElementById('cursorTrail').appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 800);
+      }
+    });
+
+    // Fake Ad
+    const fakeAd = document.getElementById('fakeAd');
+    setTimeout(() => fakeAd.classList.add('active'), 5000);
+    document.getElementById('fakeAdClose').addEventListener('click', () => {
+      fakeAd.classList.remove('active');
+      setTimeout(() => fakeAd.classList.add('active'), Math.random() * 15000 + 5000);
+    });
+
+    // Update Popup
+    const updatePopup = document.getElementById('updatePopup');
+    setTimeout(() => updatePopup.classList.add('active'), 12000);
+    document.getElementById('updateBtn').addEventListener('mouseover', (e) => {
+      // Moves away when hovered
+      const x = Math.random() * (window.innerWidth - 300);
+      const y = Math.random() * (window.innerHeight - 200);
+      updatePopup.style.left = x + 'px';
+      updatePopup.style.top = y + 'px';
+      updatePopup.style.transform = 'scale(1)';
+    });
+
+    // Impossible Captcha
+    const captchaImgs = document.querySelectorAll('.captcha-img');
+    const captchaVerify = document.getElementById('captchaVerify');
+    const captchaError = document.getElementById('captchaError');
+    captchaImgs.forEach(img => {
+      img.addEventListener('click', () => img.classList.toggle('selected'));
+    });
+    captchaVerify.addEventListener('click', () => {
+      captchaError.textContent = 'Incorrect. Try again.';
+      setTimeout(() => { captchaError.textContent = ''; }, 2000);
+    });
+
+    // Do Not Click
+    const donotContainer = document.getElementById('donotContainer');
+    document.getElementById('donotBtn').addEventListener('click', function spawnBtn() {
+      const newBtn = document.createElement('button');
+      newBtn.className = 'donot-btn';
+      newBtn.textContent = 'DO NOT CLICK';
+      newBtn.addEventListener('click', spawnBtn);
+      donotContainer.appendChild(newBtn);
+    });
+
+    // Fake Error Logs
+    const logsWindow = document.getElementById('logsWindow');
+    const logMessages = [
+      "[WARN] Entropy levels critical",
+      "[INFO] Doing nothing successfully",
+      "[ERR] Failed to find purpose at line 42",
+      "[SYS] Re-calibrating futility drive",
+      "[INFO] Ignored user input",
+      "[WARN] Memory leak detected in soul component",
+      "[ERR] NullPointerException: MeaningOfLife is null",
+      "[DEBUG] Yes, it's supposed to do that",
+      "[INFO] Spawning child process to do nothing"
+    ];
+    setInterval(() => {
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      const timestamp = new Date().toISOString().split('T')[1].slice(0, -1);
+      line.textContent = `${timestamp} ${logMessages[Math.floor(Math.random() * logMessages.length)]}`;
+      logsWindow.appendChild(line);
+      if (logsWindow.children.length > 20) {
+        logsWindow.removeChild(logsWindow.firstChild);
+      }
+    }, 800);
   }
 
   /* --------------------------------------------------------
